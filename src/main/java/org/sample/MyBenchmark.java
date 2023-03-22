@@ -44,6 +44,7 @@ public class MyBenchmark {
     public static class BenchmarkState {
         final Random random = new Random(0L);
         final SplittableRandom splittableRandom = new SplittableRandom(0L);
+        final PositiveBoundedBytes positiveBoundedBytes = new PositiveBoundedBytes(26, 65);
         final byte[] payload = new byte[1024];
 
     }
@@ -60,6 +61,11 @@ public class MyBenchmark {
         for (int j = 0; j < state.payload.length; ++j) {
             state.payload[j] = (byte) (state.splittableRandom.nextInt(26) + 65);
         }
+    }
+
+    @Benchmark
+    public void positiveBounded(BenchmarkState state) {
+        state.positiveBoundedBytes.nextBytes(state.payload);
     }
 
 }
