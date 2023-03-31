@@ -44,7 +44,7 @@ public class MyBenchmark {
     public static class BenchmarkState {
         final Random random = new Random(0L);
         final SplittableRandom splittableRandom = new SplittableRandom(0L);
-        final PositiveBoundedBytes positiveBoundedBytes = new PositiveBoundedBytes(26, 65);
+        final CharacterRandom characterRandom = new CharacterRandom("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef");
         final byte[] payload = new byte[1024];
 
     }
@@ -64,8 +64,8 @@ public class MyBenchmark {
     }
 
     @Benchmark
-    public void positiveBounded(BenchmarkState state) {
-        state.positiveBoundedBytes.nextBytes(state.payload);
+    public void randomCharacters(BenchmarkState state) {
+        state.characterRandom.nextBytes(state.payload);
     }
 
 }
